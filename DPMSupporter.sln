@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{3F31
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DPMSupporter.API", "DPMSupporter.API\DPMSupporter.API.csproj", "{9B2C15F1-AFD8-49D0-AE3F-70735D6F788B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DPMSupporter.Web", "DPMSupporter.Web\DPMSupporter.Web.csproj", "{26935C02-9970-4F10-8C0A-C2A67C2B7BAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{9B2C15F1-AFD8-49D0-AE3F-70735D6F788B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B2C15F1-AFD8-49D0-AE3F-70735D6F788B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B2C15F1-AFD8-49D0-AE3F-70735D6F788B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26935C02-9970-4F10-8C0A-C2A67C2B7BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26935C02-9970-4F10-8C0A-C2A67C2B7BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26935C02-9970-4F10-8C0A-C2A67C2B7BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26935C02-9970-4F10-8C0A-C2A67C2B7BAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9B2C15F1-AFD8-49D0-AE3F-70735D6F788B} = {3F31C5C7-B25C-4665-B7D8-D7150241EDCD}
+		{26935C02-9970-4F10-8C0A-C2A67C2B7BAB} = {416DB964-2DD1-4D98-A575-AFFB0E81F9A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A999807-4703-4357-B136-F44934A8D8F8}
