@@ -27,18 +27,15 @@ namespace DPMSupporter.Web.Controllers
             return View();
         }
 
-/*        [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> ProjectCreate(ProjectDto projectDto)
         {
             if (ModelState.IsValid)
             {
-                var response = await _projectService.<ResponseDto>(model, accessToken);
-                if (response != null && response.IsSuccess)
-                {
-                    return RedirectToAction(nameof(ProductIndex));
-                }
+                var response = await _projectService.SendPostRequest(projectDto);
+                    return RedirectToAction(nameof(ProjectIndex));
             }
-            return View(model);
-        }*/
+            return View(projectDto);
+        }
     }
 }

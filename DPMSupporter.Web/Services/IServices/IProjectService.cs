@@ -7,5 +7,6 @@ namespace DPMSupporter.Web.Services.IServices
     public interface IProjectService
     {
         Task<List<ProjectDto>> SendGetAllRequest();
+        Task<ProjectDto> SendPostRequest(ProjectDto projectDto);
     }
 }

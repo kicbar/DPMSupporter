@@ -1,6 +1,6 @@
 ﻿@model DPMSupporter.Web.Models.ProjectDto
 
-<form asp-action="ProductCreate">
+<form asp-action="ProjectCreate">
     <br />
     <div class="container border p-3">
         <h1 class="text-primary">Create Product</h1>
@@ -23,16 +23,12 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="col-5 offset-2">
-
                 <a asp-action="ProjectIndex" class="btn-primary btn form-control ">Back to List</a>
             </div>
             <div class="col-5">
                 <input type="submit" value="Create" class="btn btn-success form-control" />
-
             </div>
-
         </div>
-
         <div>
         </div>
     </div>
