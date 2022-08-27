@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DPMSupporter.Web.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DPMSupporter.Web.Services.IServices
 {
     public interface IProjectService
     {
+        Task<List<ProjectDto>> SendGetAllRequest();
     }
 }

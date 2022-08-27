@@ -1,0 +1,61 @@
+﻿@model IEnumerable<DPMSupporter.Web.Models.ProjectDto>
+@{
+    ViewData["Title"] = "Projects";
+}
+<br />
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Project List</h1>
+        </div>
+        <div class="col text-end pt-1">
+            <a asp-action="ProjectCreate" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> + Add New Project</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    ProjectName
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    CreatedDate
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.ProjectName
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.CreatedDate
+                    </td>
+                    <td>
+                        <a asp-action="ProjectEdit" class="btn btn-success w-auto" asp-route-contractorId="@item.Id">
+                            Edit
+                        </a>
+                        <a asp-action="ProjectDelete" class="btn btn-danger w-auto" asp-route-contractorId="@item.Id">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+}
+        </tbody>
+    </table>
+</div>

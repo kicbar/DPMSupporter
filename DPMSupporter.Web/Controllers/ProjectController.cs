@@ -16,9 +16,9 @@ namespace DPMSupporter.Web.Controllers
             _projectService = projectService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> ProjectIndex()
         {
-            return View();
+            return View(await _projectService.SendGetAllRequest());
         }
     }
 }
