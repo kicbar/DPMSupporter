@@ -22,9 +22,8 @@ namespace DPMSupporter.API.Infrastructure.Repositories
         {
             var createdProject = await _DPMSupporterDbContext.Projects.AddAsync(project);
             await _DPMSupporterDbContext.SaveChangesAsync();
-            return project;
+            return createdProject.Entity;
         }
-
 
         public async Task<List<Project>> GetAllProjects()
         {
@@ -41,18 +40,23 @@ namespace DPMSupporter.API.Infrastructure.Repositories
             var projectExist = await _DPMSupporterDbContext.Projects.FirstOrDefaultAsync(p => p.Id == project.Id);
             if (projectExist != null)
             {
-                _DPMSupporterDbContext.Projects.Update(project);
+                var updatedProject = _DPMSupporterDbContext.Projects.Update(project);
                 await _DPMSupporterDbContext.SaveChangesAsync();
+                return updatedProject.Entity;
             }
-            return project;
+            throw new Exception("Updated not executed.");
         }
 
         public async Task<bool> DeleteProject(Project project)
         {
             try
             {
-                _DPMSupporterDbContext.Projects.Remove(project);
-                await _DPMSupporterDbContext.SaveChangesAsync();
+                var projectExist = await _DPMSupporterDbContext.Projects.FirstOrDefaultAsync(p => p.Id == project.Id);
+                if (projectExist != null)
+                {
+                    _DPMSupporterDbContext.Projects.Remove(project);
+                    await _DPMSupporterDbContext.SaveChangesAsync();
+                }
                 return true;
             }
             catch (Exception exc)

@@ -7,7 +7,10 @@ namespace DPMSupporter.API.Application.Services.IServices
 {
     public interface IProjectService
     {
+        Task<ProjectDto> CreateProject(ProjectDto projectDto);
         Task<List<ProjectDto>> GetAllProjects();
         Task<ProjectDto> GetProject(Guid projectId);
+        Task<ProjectDto> UpdateProject(ProjectDto projectDto);
+        Task<bool> DeleteProject(ProjectDto projectDto);
     }
 }

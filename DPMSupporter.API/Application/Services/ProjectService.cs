@@ -31,6 +31,23 @@ namespace DPMSupporter.API.Application.Services
             return projectDtoList;
         }
 
+        public async Task<ProjectDto> CreateProject(ProjectDto projectDto)
+        {
+            await ManualProjectMapper(await _projectRepository.AddProject(await ReverseManualProjectMapper(projectDto)));
+            return projectDto;
+        }
+
+        public async Task<ProjectDto> UpdateProject(ProjectDto projectDto)
+        {
+            await ManualProjectMapper(await _projectRepository.UpdateProject(await ReverseManualProjectMapper(projectDto)));
+            return projectDto;
+        }
+
+        public async Task<bool> DeleteProject(ProjectDto projectDto)
+        {
+            return await  _projectRepository.DeleteProject(await ReverseManualProjectMapper(projectDto));
+        }
+
         private static async Task<ProjectDto> ManualProjectMapper(Project project)
         {
             return await System.Threading.Tasks.Task.Run(() =>
@@ -41,6 +58,18 @@ namespace DPMSupporter.API.Application.Services
                 Description = project.Description,
                 CreatedDate = project.CreatedDate
             }); 
+        }
+
+        private static async Task<Project> ReverseManualProjectMapper(ProjectDto projectDto)
+        {
+            return await System.Threading.Tasks.Task.Run(() =>
+            new Project
+            {
+                Id = projectDto.Id,
+                ProjectName = projectDto.ProjectName,
+                Description = projectDto.Description,
+                CreatedDate = projectDto.CreatedDate
+            });
         }
     }
 }
