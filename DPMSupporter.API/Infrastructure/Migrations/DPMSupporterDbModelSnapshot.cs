@@ -54,10 +54,10 @@ namespace DPMSupporter.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ImplementedDate")
+                    b.Property<DateTime?>("ImplementedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsImplemented")
+                    b.Property<bool?>("IsImplemented")
                         .HasColumnType("bit");
 
                     b.Property<Guid>("ProjectId")

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DPMSupporter.API.Migrations
 {
-    public partial class DbCreate : Migration
+    public partial class CreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace DPMSupporter.API.Migrations
                     ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProjectShortName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: DateTime.Now)
                 },
                 constraints: table =>
                 {
@@ -29,9 +29,9 @@ namespace DPMSupporter.API.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TaskName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsImplemented = table.Column<bool>(type: "bit", nullable: false),
-                    ImplementedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: DateTime.Now),
+                    IsImplemented = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    ImplementedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ProjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
