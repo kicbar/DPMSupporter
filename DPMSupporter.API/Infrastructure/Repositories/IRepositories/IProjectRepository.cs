@@ -1,15 +1,16 @@
 ﻿using DPMSupporter.API.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DPMSupporter.API.Infrastructure.Repositories.IRepositories
 {
     public interface IProjectRepository
     {
-        Guid AddProject(Project project);
-        bool DeleteProject(Project project);
-        List<Project> GetAllProjects();
-        Project GetProject(Guid projectGuid);
-        Project UpdateProject(Project project);
+        Task<Project> AddProject(Project project);
+        Task<List<Project>> GetAllProjects();
+        Task<Project> GetProject(Guid projectId);
+        Task<Project> UpdateProject(Project project);
+        Task<bool> DeleteProject(Project project);
     }
 }

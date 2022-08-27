@@ -1,6 +1,7 @@
 ﻿using DPMSupporter.API.Domain.Entities;
 using DPMSupporter.API.Infrastructure.Data;
 using DPMSupporter.API.Infrastructure.Repositories.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,28 +18,30 @@ namespace DPMSupporter.API.Infrastructure.Repositories
             _DPMSupporterDbContext = DPMSupporterDbContext;
         }
 
-        public Guid AddProject(Project project)
+        public Task<Project> AddProject(Project project)
         {
-            return Guid.NewGuid();
-        }
-        public Project GetProject(Guid projectGuid)
-        {
-            return new Project();
+            throw new NotImplementedException();
         }
 
-        public List<Project> GetAllProjects()
+
+        public async Task<List<Project>> GetAllProjects()
         {
-            return new List<Project>();
+            return await _DPMSupporterDbContext.Projects.ToListAsync();
         }
 
-        public Project UpdateProject(Project project)
+        public async Task<Project> GetProject(Guid projectId)
         {
-            return new Project();
+            return await _DPMSupporterDbContext.Projects.Where(p => p.Id == projectId).FirstOrDefaultAsync();
         }
 
-        public bool DeleteProject(Project project)
+        public Task<Project> UpdateProject(Project project)
         {
-            return true;
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteProject(Project project)
+        {
+            throw new NotImplementedException();
         }
     }
 }
