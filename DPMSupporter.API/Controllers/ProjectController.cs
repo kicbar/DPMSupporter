@@ -19,9 +19,9 @@ namespace DPMSupporter.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ProjectDto> Post([FromBody] ProjectDto productDto)
+        public async Task<ProjectDto> Post([FromBody] ProjectWriteDto projectWriteDto)
         {
-            return await _projectService.CreateProject(productDto);
+            return await _projectService.CreateProject(projectWriteDto);
         }
 
         [HttpGet]
@@ -37,9 +37,9 @@ namespace DPMSupporter.API.Controllers
         }
 
         [HttpPut("{projectId}")]
-        public async Task<ProjectDto> Put([FromRoute] Guid projectId, [FromBody] ProjectDto productDto)
+        public async Task<ProjectDto> Put([FromRoute] Guid projectId, [FromBody] ProjectWriteDto projectWriteDto)
         {
-            return await _projectService.UpdateProject(productDto);
+            return await _projectService.UpdateProject(projectId, projectWriteDto);
         }
 
         [HttpDelete("{projectId}")]

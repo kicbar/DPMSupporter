@@ -16,6 +16,11 @@ namespace DPMSupporter.API.Application.Services
         {
             _projectRepository = projectRepository;
         }
+        public async Task<ProjectDto> CreateProject(ProjectWriteDto projectWriteDto)
+        {
+            return await ManualProjectMapper(await _projectRepository.AddProject(await ReverseManualProjectMapper(projectWriteDto)));
+        }
+
         public async Task<ProjectDto> GetProject(Guid projectId)
         {
             return await ManualProjectMapper(await _projectRepository.GetProject(projectId));
@@ -25,27 +30,19 @@ namespace DPMSupporter.API.Application.Services
         {
             List<ProjectDto> projectDtoList = new();
             foreach (Project project in await _projectRepository.GetAllProjects())
-            {
                 projectDtoList.Add(await ManualProjectMapper(project));
-            }
+
             return projectDtoList;
         }
 
-        public async Task<ProjectDto> CreateProject(ProjectDto projectDto)
+        public async Task<ProjectDto> UpdateProject(Guid projectId, ProjectWriteDto projectWriteDto)
         {
-            await ManualProjectMapper(await _projectRepository.AddProject(await ReverseManualProjectMapper(projectDto)));
-            return projectDto;
-        }
-
-        public async Task<ProjectDto> UpdateProject(ProjectDto projectDto)
-        {
-            await ManualProjectMapper(await _projectRepository.UpdateProject(await ReverseManualProjectMapper(projectDto)));
-            return projectDto;
+            return await ManualProjectMapper(await _projectRepository.UpdateProject(await ReverseManualProjectMapper(projectWriteDto, projectId)));
         }
 
         public async Task<bool> DeleteProject(Guid projectId)
         {
-            return await  _projectRepository.DeleteProject(projectId);
+            return await _projectRepository.DeleteProject(projectId);
         }
 
         private static async Task<ProjectDto> ManualProjectMapper(Project project)
@@ -60,15 +57,26 @@ namespace DPMSupporter.API.Application.Services
             }); 
         }
 
-        private static async Task<Project> ReverseManualProjectMapper(ProjectDto projectDto)
+        private static async Task<Project> ReverseManualProjectMapper(ProjectWriteDto projectWriteDto)
         {
             return await System.Threading.Tasks.Task.Run(() =>
             new Project
             {
-                Id = projectDto.Id,
-                ProjectName = projectDto.ProjectName,
-                Description = projectDto.Description,
-                CreatedDate = projectDto.CreatedDate
+                ProjectName = projectWriteDto.ProjectName,
+                Description = projectWriteDto.Description,
+                ProjectShortName = projectWriteDto.ProjectShortName
+            });
+        }
+
+        private static async Task<Project> ReverseManualProjectMapper(ProjectWriteDto projectWriteDto, Guid projectId)
+        {
+            return await System.Threading.Tasks.Task.Run(() =>
+            new Project
+            {
+                Id = projectId,
+                ProjectName = projectWriteDto.ProjectName,
+                Description = projectWriteDto.Description,
+                ProjectShortName = projectWriteDto.ProjectShortName
             });
         }
     }
