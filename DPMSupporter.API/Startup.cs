@@ -1,4 +1,6 @@
 using DPMSupporter.API.Infrastructure.Data;
+using DPMSupporter.API.Infrastructure.Repositories;
+using DPMSupporter.API.Infrastructure.Repositories.IRepositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,7 +28,8 @@ namespace DPMSupporter.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DPMSupporterDb>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddDbContext<DPMSupporterDbContext>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

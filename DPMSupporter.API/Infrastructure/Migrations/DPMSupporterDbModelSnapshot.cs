@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DPMSupporter.API.Migrations
 {
-    [DbContext(typeof(DPMSupporterDb))]
+    [DbContext(typeof(DPMSupporterDbContext))]
     partial class DPMSupporterDbModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -4,12 +4,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace DPMSupporter.API.Infrastructure.Data
 {
-    public class DPMSupporterDb : DbContext
+    public class DPMSupporterDbContext : DbContext
     {
         private readonly IConfiguration _config;
         private readonly string _connectionString;
 
-        public DPMSupporterDb(IConfiguration config)
+        public DPMSupporterDbContext(IConfiguration config)
         {
             _config = config;
             _connectionString = _config.GetConnectionString("DefaultConnection");
