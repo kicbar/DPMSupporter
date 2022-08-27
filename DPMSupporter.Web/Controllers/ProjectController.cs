@@ -1,4 +1,5 @@
-﻿using DPMSupporter.Web.Services.IServices;
+﻿using DPMSupporter.Web.Models;
+using DPMSupporter.Web.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,24 @@ namespace DPMSupporter.Web.Controllers
         {
             return View(await _projectService.SendGetAllRequest());
         }
+
+        public async Task<IActionResult> ProjectCreate()
+        {
+            return View();
+        }
+
+/*        [HttpPost]
+        public async Task<IActionResult> ProjectCreate(ProjectDto projectDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _projectService.<ResponseDto>(model, accessToken);
+                if (response != null && response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(ProductIndex));
+                }
+            }
+            return View(model);
+        }*/
     }
 }
