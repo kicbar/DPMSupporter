@@ -18,6 +18,12 @@ namespace DPMSupporter.API.Controllers
             _projectService = projectService;
         }
 
+        [HttpPost]
+        public async Task<ProjectDto> Post([FromBody] ProjectDto productDto)
+        {
+            return await _projectService.CreateProject(productDto);
+        }
+
         [HttpGet]
         public async Task<List<ProjectDto>> GetAll()
         {
@@ -25,24 +31,21 @@ namespace DPMSupporter.API.Controllers
         }
 
         [HttpGet("{projectId}")]
-        public async Task<ProjectDto> Get(Guid projectId)
+        public async Task<ProjectDto> Get([FromForm] Guid projectId)
         {
             return await _projectService.GetProject(projectId);
         }
 
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPut]
+        public async Task<ProjectDto> Put([FromBody] ProjectDto productDto)
         {
+            return await _projectService.UpdateProject(productDto);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpDelete]
+        public async Task<bool> Delete([FromBody] ProjectDto productDto)
         {
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return await _projectService.DeleteProject(productDto);
         }
     }
 }
