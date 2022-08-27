@@ -31,7 +31,7 @@ namespace DPMSupporter.API.Application.Services
             return projectDtoList;
         }
 
-        private async Task<ProjectDto> ManualProjectMapper(Project project)
+        private static async Task<ProjectDto> ManualProjectMapper(Project project)
         {
             return await System.Threading.Tasks.Task.Run(() =>
             new ProjectDto
