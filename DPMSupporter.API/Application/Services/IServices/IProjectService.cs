@@ -11,6 +11,6 @@ namespace DPMSupporter.API.Application.Services.IServices
         Task<List<ProjectDto>> GetAllProjects();
         Task<ProjectDto> GetProject(Guid projectId);
         Task<ProjectDto> UpdateProject(ProjectDto projectDto);
-        Task<bool> DeleteProject(ProjectDto projectDto);
+        Task<bool> DeleteProject(Guid projectId);
     }
 }

@@ -47,14 +47,14 @@ namespace DPMSupporter.API.Infrastructure.Repositories
             throw new Exception("Updated not executed.");
         }
 
-        public async Task<bool> DeleteProject(Project project)
+        public async Task<bool> DeleteProject(Guid projectId)
         {
             try
             {
-                var projectExist = await _DPMSupporterDbContext.Projects.FirstOrDefaultAsync(p => p.Id == project.Id);
+                var projectExist = await _DPMSupporterDbContext.Projects.FirstOrDefaultAsync(p => p.Id == projectId);
                 if (projectExist != null)
                 {
-                    _DPMSupporterDbContext.Projects.Remove(project);
+                    _DPMSupporterDbContext.Projects.Remove(projectExist);
                     await _DPMSupporterDbContext.SaveChangesAsync();
                 }
                 return true;

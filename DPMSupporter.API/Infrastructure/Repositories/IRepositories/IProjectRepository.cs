@@ -11,6 +11,6 @@ namespace DPMSupporter.API.Infrastructure.Repositories.IRepositories
         Task<List<Project>> GetAllProjects();
         Task<Project> GetProject(Guid projectId);
         Task<Project> UpdateProject(Project project);
-        Task<bool> DeleteProject(Project project);
+        Task<bool> DeleteProject(Guid projectId);
     }
 }

@@ -43,9 +43,9 @@ namespace DPMSupporter.API.Application.Services
             return projectDto;
         }
 
-        public async Task<bool> DeleteProject(ProjectDto projectDto)
+        public async Task<bool> DeleteProject(Guid projectId)
         {
-            return await  _projectRepository.DeleteProject(await ReverseManualProjectMapper(projectDto));
+            return await  _projectRepository.DeleteProject(projectId);
         }
 
         private static async Task<ProjectDto> ManualProjectMapper(Project project)

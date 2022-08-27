@@ -31,21 +31,21 @@ namespace DPMSupporter.API.Controllers
         }
 
         [HttpGet("{projectId}")]
-        public async Task<ProjectDto> Get([FromForm] Guid projectId)
+        public async Task<ProjectDto> Get([FromRoute] Guid projectId)
         {
             return await _projectService.GetProject(projectId);
         }
 
-        [HttpPut]
-        public async Task<ProjectDto> Put([FromBody] ProjectDto productDto)
+        [HttpPut("{projectId}")]
+        public async Task<ProjectDto> Put([FromRoute] Guid projectId, [FromBody] ProjectDto productDto)
         {
             return await _projectService.UpdateProject(productDto);
         }
 
-        [HttpDelete]
-        public async Task<bool> Delete([FromBody] ProjectDto productDto)
+        [HttpDelete("{projectId}")]
+        public async Task<bool> Delete([FromRoute] Guid projectId)
         {
-            return await _projectService.DeleteProject(productDto);
+            return await _projectService.DeleteProject(projectId);
         }
     }
 }
