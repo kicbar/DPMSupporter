@@ -15,7 +15,9 @@ namespace DPMSupporter.Web.Services
         {
             ProjectDto project = new();
             var content = new StringContent(JsonConvert.SerializeObject(projectDto), Encoding.UTF8, "application/json");
-            using (var httpClient = new HttpClient())
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            using (var httpClient = new HttpClient(clientHandler))
             {
                 using var response = await httpClient.PostAsync(ApiData.ApiAddress + "/api/project", content);
                 string apiResponse = await response.Content.ReadAsStringAsync();
@@ -27,7 +29,9 @@ namespace DPMSupporter.Web.Services
         public async Task<List<ProjectDto>> SendGetAllRequest()
         {
             List<ProjectDto> projectList = new();
-            using (var httpClient = new HttpClient())
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            using (var httpClient = new HttpClient(clientHandler))
             {
                 using var response = await httpClient.GetAsync(ApiData.ApiAddress + "/api/project");
                 string apiResponse = await response.Content.ReadAsStringAsync();
@@ -39,7 +43,9 @@ namespace DPMSupporter.Web.Services
         public async Task<ProjectDto> SendGetRequest(Guid projectId)
         {
             ProjectDto project = new();
-            using (var httpClient = new HttpClient())
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            using (var httpClient = new HttpClient(clientHandler))
             {
                 using var response = await httpClient.GetAsync(ApiData.ApiAddress + $"/api/project/{projectId}");
                 string apiResponse = await response.Content.ReadAsStringAsync();
@@ -51,7 +57,9 @@ namespace DPMSupporter.Web.Services
         public async Task<ProjectDto> SendPutRequest(ProjectDto projectDto)
         {
             ProjectDto project = new();
-            using (var httpClient = new HttpClient())
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            using (var httpClient = new HttpClient(clientHandler))
             {
                 using var response = await httpClient.GetAsync(ApiData.ApiAddress + $"/api/project/{projectDto.Id}");
                 string apiResponse = await response.Content.ReadAsStringAsync();
@@ -63,7 +71,9 @@ namespace DPMSupporter.Web.Services
         public async Task<bool> SendDeleteRequest(Guid projectId)
         {
             ProjectDto project = new();
-            using (var httpClient = new HttpClient())
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            using (var httpClient = new HttpClient(clientHandler))
             {
                 using var response = await httpClient.GetAsync(ApiData.ApiAddress + $"/api/project/{projectId}");
                 string apiResponse = await response.Content.ReadAsStringAsync();
