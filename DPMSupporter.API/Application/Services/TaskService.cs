@@ -16,17 +16,17 @@ namespace DPMSupporter.API.Application.Services
             _taskRepository = taskRepository;
         }
 
-        public async Task<TaskDto> CreateProject(TaskDto taskDto)
+        public async Task<TaskDto> CreateTask(TaskDto taskDto)
         {
             return await ManualTaskMapper(await _taskRepository.AddTask(await ReverseManualTaskMapper(taskDto)));
         }
 
-        public async Task<TaskDto> GetProject(Guid taskId)
+        public async Task<TaskDto> GetTask(Guid taskId)
         {
             return await ManualTaskMapper(await _taskRepository.GetTask(taskId));
         }
 
-        public async Task<List<TaskDto>> GetAllProjects()
+        public async Task<List<TaskDto>> GetAllTask()
         {
             List<TaskDto> projectDtoList = new();
             foreach (Domain.Entities.Task task in await _taskRepository.GetAllTasks())
@@ -35,12 +35,12 @@ namespace DPMSupporter.API.Application.Services
             return projectDtoList;
         }
 
-        public async Task<TaskDto> UpdateProject(Guid taskId, TaskDto taskDto)
+        public async Task<TaskDto> UpdateTask(Guid taskId, TaskDto taskDto)
         {
             return await ManualTaskMapper(await _taskRepository.UpdateTask(await ReverseManualTaskMapper(taskDto, taskId)));
         }
 
-        public async Task<bool> DeleteProject(Guid taskId)
+        public async Task<bool> DeleteTask(Guid taskId)
         {
             return await _taskRepository.DeleteTask(taskId);
         }
@@ -55,7 +55,7 @@ namespace DPMSupporter.API.Application.Services
                 Description = task.Description,
                 CreationDate = task.CreationDate,
                 IsImplemented = (bool)task.IsImplemented,
-                ImplementedDate = (DateTime)task.ImplementedDate,
+                ImplementedDate = task.ImplementedDate!=null ? task.ImplementedDate : null,
                 ProjectId = task.ProjectId
             });
         }

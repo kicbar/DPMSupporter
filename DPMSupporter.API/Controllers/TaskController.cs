@@ -1,11 +1,14 @@
-﻿using DPMSupporter.API.Application.Services.IServices;
+﻿using DPMSupporter.API.Application.DTOs;
+using DPMSupporter.API.Application.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DPMSupporter.API.Controllers
 {
-    [Route("api/task")]
     [ApiController]
+    [Route("api/task")]
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
@@ -15,36 +18,34 @@ namespace DPMSupporter.API.Controllers
             _taskService = taskService;
         }
 
-        // GET: api/<TaskController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<TaskController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<TaskController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<TaskDto> Post([FromBody] TaskDto taskDto)
         {
+            return await _taskService.CreateTask(taskDto);
         }
 
-        // PUT api/<TaskController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpGet]
+        public async Task<List<TaskDto>> GetAll()
         {
+            return await _taskService.GetAllTask();
         }
 
-        // DELETE api/<TaskController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpGet("{taskid}")]
+        public async Task<TaskDto> Get([FromRoute] Guid taskId)
         {
+            return await _taskService.GetTask(taskId);
+        }
+
+        [HttpPut("{taskId}")]
+        public async Task<TaskDto> Put([FromRoute] Guid taskId, [FromBody] TaskDto taskDto)
+        {
+            return await _taskService.UpdateTask(taskId, taskDto);
+        }
+
+        [HttpDelete("{taskId}")]
+        public async Task<bool> Delete([FromRoute] Guid taskId)
+        {
+            return await _taskService.DeleteTask(taskId);
         }
     }
 }
