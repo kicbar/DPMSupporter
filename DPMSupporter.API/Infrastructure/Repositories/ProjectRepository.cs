@@ -50,7 +50,7 @@ namespace DPMSupporter.API.Infrastructure.Repositories
         public async Task<bool> DeleteProject(Guid projectId)
         {
             try
-            {//
+            {
                 var projectExist = await _DPMSupporterDbContext.Projects.FirstOrDefaultAsync(p => p.Id == projectId);
                 if (projectExist != null)
                 {

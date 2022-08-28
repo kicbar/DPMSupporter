@@ -25,6 +25,8 @@ namespace DPMSupporter.API
         {
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITaskService, TaskService>();
             services.AddDbContext<DPMSupporterDbContext>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
