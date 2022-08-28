@@ -16,6 +16,7 @@ namespace DPMSupporter.API.Application.Services
         {
             _projectRepository = projectRepository;
         }
+
         public async Task<ProjectDto> CreateProject(ProjectWriteDto projectWriteDto)
         {
             return await ManualProjectMapper(await _projectRepository.AddProject(await ReverseManualProjectMapper(projectWriteDto)));
