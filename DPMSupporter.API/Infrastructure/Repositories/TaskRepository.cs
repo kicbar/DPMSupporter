@@ -24,19 +24,19 @@ namespace DPMSupporter.API.Infrastructure.Repositories
             return createdTask.Entity;
         }
 
-        public async Task<List<Domain.Entities.Task>> GetAllTasks()
+        public async Task<List<Domain.Entities.Task>> GetAllTasks(Guid projectId)
         {
-            return await _DPMSupporterDbContext.Tasks.ToListAsync();
+            return await _DPMSupporterDbContext.Tasks.Where(t => t.ProjectId == projectId).ToListAsync();
         }
 
-        public async Task<Domain.Entities.Task> GetTask(Guid taskId)
+        public async Task<Domain.Entities.Task> GetTask(Guid projectId, Guid taskId)
         {
-            return await _DPMSupporterDbContext.Tasks.Where(t => t.Id == taskId).FirstOrDefaultAsync();
+            return await _DPMSupporterDbContext.Tasks.Where(t => t.ProjectId == projectId).Where(t => t.Id == taskId).FirstOrDefaultAsync();
         }
 
         public async Task<Domain.Entities.Task> UpdateTask(Domain.Entities.Task task)
         {
-            var taskExist = await _DPMSupporterDbContext.Tasks.FirstOrDefaultAsync(t => t.Id == task.Id);
+            var taskExist = await _DPMSupporterDbContext.Tasks.Where(t => t.ProjectId == task.ProjectId).FirstOrDefaultAsync(t => t.Id == task.Id);
             if (taskExist != null)
             {
                 var updatedTask = _DPMSupporterDbContext.Tasks.Update(task);
@@ -46,11 +46,11 @@ namespace DPMSupporter.API.Infrastructure.Repositories
             throw new Exception("Updated not executed.");
         }
 
-        public async Task<bool> DeleteTask(Guid taskId)
+        public async Task<bool> DeleteTask(Guid projectId, Guid taskId)
         {
             try
             {
-                var taskExist = await _DPMSupporterDbContext.Tasks.FirstOrDefaultAsync(t => t.Id == taskId);
+                var taskExist = await _DPMSupporterDbContext.Tasks.Where(t => t.ProjectId == projectId).FirstOrDefaultAsync(t => t.Id == taskId);
                 if (taskExist != null)
                 {
                     _DPMSupporterDbContext.Tasks.Remove(taskExist);
