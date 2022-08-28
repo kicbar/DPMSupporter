@@ -55,5 +55,22 @@ namespace DPMSupporter.Web.Controllers
             }
             return View(projectDto);
         }
+
+        public async Task<IActionResult> ProjectDelete(Guid Id)
+        {
+            var response = await _projectService.SendGetRequest(Id);
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ProjectDelete(ProjectDto projectDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _projectService.SendDeleteRequest(projectDto.Id);
+                return RedirectToAction(nameof(ProjectIndex));
+            }
+            return View(projectDto);
+        }
     }
 }

@@ -76,7 +76,7 @@ namespace DPMSupporter.Web.Services
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             using (var httpClient = new HttpClient(clientHandler))
             {
-                using var response = await httpClient.GetAsync(ApiData.ApiAddress + $"/api/project/{projectId}");
+                using var response = await httpClient.DeleteAsync(ApiData.ApiAddress + $"/api/project/{projectId}");
                 string apiResponse = await response.Content.ReadAsStringAsync();
                 //project = JsonConvert.DeserializeObject<ProjectDto>(apiResponse);
             }
