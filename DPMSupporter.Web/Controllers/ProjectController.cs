@@ -1,6 +1,7 @@
 ﻿using DPMSupporter.Web.Models;
 using DPMSupporter.Web.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,23 @@ namespace DPMSupporter.Web.Controllers
             {
                 var response = await _projectService.SendPostRequest(projectDto);
                     return RedirectToAction(nameof(ProjectIndex));
+            }
+            return View(projectDto);
+        }
+
+        public async Task<IActionResult> ProductEdit(Guid projectId)
+        {
+            var response = await _projectService.SendGetRequest(projectId);
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ProductEdit(ProjectDto projectDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _projectService.SendPutRequest(projectDto);
+                return RedirectToAction(nameof(ProjectIndex));
             }
             return View(projectDto);
         }

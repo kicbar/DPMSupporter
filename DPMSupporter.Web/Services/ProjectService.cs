@@ -1,6 +1,7 @@
 ﻿using DPMSupporter.Web.Models;
 using DPMSupporter.Web.Services.IServices;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -10,6 +11,19 @@ namespace DPMSupporter.Web.Services
 {
     public class ProjectService : IProjectService
     {
+        public async Task<ProjectDto> SendPostRequest(ProjectDto projectDto)
+        {
+            ProjectDto project = new();
+            var content = new StringContent(JsonConvert.SerializeObject(projectDto), Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using var response = await httpClient.PostAsync(ApiData.ApiAddress + "/api/project", content);
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                project = JsonConvert.DeserializeObject<ProjectDto>(apiResponse);
+            }
+            return project;
+        }
+
         public async Task<List<ProjectDto>> SendGetAllRequest()
         {
             List<ProjectDto> projectList = new();
@@ -22,17 +36,40 @@ namespace DPMSupporter.Web.Services
             return projectList;
         }
 
-        public async Task<ProjectDto> SendPostRequest(ProjectDto projectDto)
+        public async Task<ProjectDto> SendGetRequest(Guid projectId)
         {
             ProjectDto project = new();
-            var content = new StringContent(JsonConvert.SerializeObject(projectDto), Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient())
             {
-                using var response = await httpClient.PostAsync(ApiData.ApiAddress + "/api/project", content);
+                using var response = await httpClient.GetAsync(ApiData.ApiAddress + $"/api/project/{projectId}");
                 string apiResponse = await response.Content.ReadAsStringAsync();
                 project = JsonConvert.DeserializeObject<ProjectDto>(apiResponse);
             }
             return project;
+        }
+
+        public async Task<ProjectDto> SendPutRequest(ProjectDto projectDto)
+        {
+            ProjectDto project = new();
+            using (var httpClient = new HttpClient())
+            {
+                using var response = await httpClient.GetAsync(ApiData.ApiAddress + $"/api/project/{projectDto.Id}");
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                project = JsonConvert.DeserializeObject<ProjectDto>(apiResponse);
+            }
+            return project;
+        }
+
+        public async Task<bool> SendDeleteRequest(Guid projectId)
+        {
+            ProjectDto project = new();
+            using (var httpClient = new HttpClient())
+            {
+                using var response = await httpClient.GetAsync(ApiData.ApiAddress + $"/api/project/{projectId}");
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                //project = JsonConvert.DeserializeObject<ProjectDto>(apiResponse);
+            }
+            return true;
         }
     }
 }
