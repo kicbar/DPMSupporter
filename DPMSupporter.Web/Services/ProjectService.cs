@@ -57,11 +57,12 @@ namespace DPMSupporter.Web.Services
         public async Task<ProjectDto> SendPutRequest(ProjectDto projectDto)
         {
             ProjectDto project = new();
+            var content = new StringContent(JsonConvert.SerializeObject(projectDto), Encoding.UTF8, "application/json");
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             using (var httpClient = new HttpClient(clientHandler))
             {
-                using var response = await httpClient.GetAsync(ApiData.ApiAddress + $"/api/project/{projectDto.Id}");
+                using var response = await httpClient.PutAsync(ApiData.ApiAddress + $"/api/project/{projectDto.Id}", content);
                 string apiResponse = await response.Content.ReadAsStringAsync();
                 project = JsonConvert.DeserializeObject<ProjectDto>(apiResponse);
             }

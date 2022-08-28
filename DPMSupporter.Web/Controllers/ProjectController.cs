@@ -39,14 +39,14 @@ namespace DPMSupporter.Web.Controllers
             return View(projectDto);
         }
 
-        public async Task<IActionResult> ProductEdit(Guid projectId)
+        public async Task<IActionResult> ProjectEdit(Guid Id)
         {
-            var response = await _projectService.SendGetRequest(projectId);
+            var response = await _projectService.SendGetRequest(Id);
             return View(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ProductEdit(ProjectDto projectDto)
+        public async Task<IActionResult> ProjectEdit(ProjectDto projectDto)
         {
             if (ModelState.IsValid)
             {
