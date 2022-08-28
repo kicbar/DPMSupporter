@@ -1,0 +1,61 @@
+﻿@model IEnumerable<DPMSupporter.Web.Models.TaskDto>
+@{
+    ViewData["Title"] = "Task";
+}
+<br />
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Task List</h1>
+        </div>
+        <div class="col text-end pt-1">
+            <a asp-action="TaskCreate" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> + Add New Task</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    TaskId
+                </th>
+                <th>
+                    TaskName
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    CreatedDate
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.TaskName
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.CreationDate
+                    </td>
+                    <td>
+                        <a asp-action="TaskEdit" class="btn btn-success w-auto" asp-route-Id="@item.Id">
+                            Edit
+                        </a>
+                        <a asp-action="TaskDelete" class="btn btn-danger w-auto" asp-route-Id="@item.Id">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
