@@ -47,10 +47,10 @@
                         @item.CreationDate
                     </td>
                     <td>
-                        <a asp-action="TaskEdit" class="btn btn-success w-25" asp-route-Id="@item.Id">
+                        <a asp-action="TaskEdit" class="btn btn-success w-auto" asp-route-Id="@item.Id">
                             Edit
                         </a>
-                        <a asp-action="TaskDelete" class="btn btn-danger w-25" asp-route-Id="@item.Id">
+                        <a asp-action="TaskDelete" class="btn btn-danger w-auto" asp-route-Id="@item.Id">
                             Delete
                         </a>
                     </td>
@@ -59,3 +59,5 @@
         </tbody>
     </table>
 </div>
+</br>
+<a asp-action="TaskIndex" class="btn-primary btn form-control w-50 float-left">Back to project list</a>

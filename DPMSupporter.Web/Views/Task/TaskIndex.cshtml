@@ -11,7 +11,7 @@
     <div>
         @foreach (var item in Model)
         {   
-            <a asp-action="TaskList" class="btn btn-success w-auto w-50" asp-route-projectId=@item.Id>@item.ProjectName</a>
+            <a asp-action="TaskList" class="btn btn-outline-primary w-auto" asp-route-projectId=@item.Id>@item.ProjectName</a>
         }
     </div>
 </div>
