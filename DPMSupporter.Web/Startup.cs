@@ -26,6 +26,8 @@ namespace DPMSupporter.Web
         {
             services.AddHttpClient<IProjectService, ProjectService>();
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddHttpClient<ITaskService, TaskService>();
+            services.AddScoped<ITaskService, TaskService>();
             services.AddControllersWithViews();
         }
 
