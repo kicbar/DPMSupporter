@@ -34,7 +34,7 @@ namespace DPMSupporter.Web.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _projectService.SendPostRequest(projectDto);
-                    return RedirectToAction(nameof(ProjectIndex));
+                return RedirectToAction(nameof(ProjectIndex));
             }
             return View(projectDto);
         }

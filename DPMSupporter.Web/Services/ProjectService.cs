@@ -71,7 +71,6 @@ namespace DPMSupporter.Web.Services
 
         public async Task<bool> SendDeleteRequest(Guid projectId)
         {
-            ProjectDto project = new();
             HttpClientHandler clientHandler = new ();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             using (var httpClient = new HttpClient(clientHandler))
