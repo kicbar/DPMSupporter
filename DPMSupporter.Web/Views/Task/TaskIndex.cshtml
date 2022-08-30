@@ -8,11 +8,10 @@
     <h1 class="text-primary">Select your project</h1>
 </div>
 <div class="container p-5 border">
-    <select class="btn btn-outline-primary float-left w-50"> name="projects" id="projects">
+    <div>
         @foreach (var item in Model)
         {   
-            <option value="@item.ProjectName">@item.ProjectName</option>
+            <a asp-action="TaskList" class="btn btn-success w-auto w-50" asp-route-projectId=@item.Id>@item.ProjectName</a>
         }
-    </select>
-    <a asp-action="TaskList" class="btn btn-outline-primary float-right w-25"><i class="fas fa-plus"></i>Szukaj</a>
+    </div>
 </div>
