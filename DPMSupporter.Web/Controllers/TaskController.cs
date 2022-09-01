@@ -36,8 +36,7 @@ namespace DPMSupporter.Web.Controllers
         public async Task<IActionResult> TaskCreate(Guid projectId, TaskDto taskDto)
         {
             var response = await _taskService.SendPostRequest(projectId, taskDto);
-            return RedirectToAction(nameof(TaskIndex));
-            return View(taskDto);
+            return RedirectToAction(nameof(TaskList), new { projectId = taskDto.ProjectId });
         }
 
         public async Task<IActionResult> TaskEdit(Guid projectId, Guid taskId)
