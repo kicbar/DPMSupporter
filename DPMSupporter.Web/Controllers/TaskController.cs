@@ -35,17 +35,26 @@ namespace DPMSupporter.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> TaskCreate(Guid projectId, TaskDto taskDto)
         {
-            if (ModelState.IsValid)
-            {
-                var response = await _taskService.SendPostRequest(projectId, taskDto);
-                return RedirectToAction(nameof(TaskIndex));
-            }
+            var response = await _taskService.SendPostRequest(projectId, taskDto);
+            return RedirectToAction(nameof(TaskIndex));
             return View(taskDto);
         }
 
-        public IActionResult TaskEdit()
+        public async Task<IActionResult> TaskEdit(Guid projectId, Guid taskId)
         {
-            return View();
+            var response = await _taskService.SendGetRequest(projectId, taskId);
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TaskEdit(Guid projectId, Guid taskId, TaskDto taskDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _taskService.SendPutRequest(taskDto);
+                return RedirectToAction(nameof(TaskList), new { projectId = taskDto.ProjectId});
+            }
+            return View(taskDto);
         }
 
         public IActionResult TaskDelete()
