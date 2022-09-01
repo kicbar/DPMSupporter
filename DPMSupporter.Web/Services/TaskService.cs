@@ -54,7 +54,7 @@ namespace DPMSupporter.Web.Services
             return task;
         }
 
-        public async Task<TaskDto> SendPutRequest(Guid projectId, Guid taskId, TaskDto taskDto)
+        public async Task<TaskDto> SendPutRequest(TaskDto taskDto)
         {
             TaskDto task = new();
             var content = new StringContent(JsonConvert.SerializeObject(taskDto), Encoding.UTF8, "application/json");
@@ -62,7 +62,7 @@ namespace DPMSupporter.Web.Services
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             using (var httpClient = new HttpClient(clientHandler))
             {
-                using var response = await httpClient.PutAsync(ApiData.ApiAddress + $"/api/project/{projectId}/task/{taskId}", content);
+                using var response = await httpClient.PutAsync(ApiData.ApiAddress + $"/api/project/{taskDto.ProjectId}/task/{taskDto.Id}", content);
                 string apiResponse = await response.Content.ReadAsStringAsync();
                 task = JsonConvert.DeserializeObject<TaskDto>(apiResponse);
             }

@@ -10,7 +10,7 @@ namespace DPMSupporter.Web.Services.IServices
         Task<TaskDto> SendPostRequest(Guid projectId, TaskDto taskDto);
         Task<List<TaskDto>> SendGetAllRequest(Guid projectId);
         Task<TaskDto> SendGetRequest(Guid projectId, Guid taskId);
-        Task<TaskDto> SendPutRequest(Guid projectId, Guid taskId, TaskDto taskDto);
+        Task<TaskDto> SendPutRequest(TaskDto taskDto);
         Task<bool> SendDeleteRequest(Guid projectId, Guid taskId);
     }
 }

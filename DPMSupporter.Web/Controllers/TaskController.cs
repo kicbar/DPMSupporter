@@ -46,7 +46,7 @@ namespace DPMSupporter.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> TaskEdit(Guid projectId, Guid taskId, TaskDto taskDto)
+        public async Task<IActionResult> TaskEdit(Guid projectId, Guid Id, TaskDto taskDto)
         {
             if (ModelState.IsValid)
             {

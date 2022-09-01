@@ -30,6 +30,15 @@
                 <th>
                     CreatedDate
                 </th>
+                <th>
+                    IsImplemented
+                </th>        
+                <th>
+                    ImplementedDate
+                </th>   
+                <th>
+                    ProjectId
+                </th>   
             </tr>
         </thead>
         <tbody>
@@ -49,8 +58,17 @@
                         @item.CreationDate
                     </td>
                     <td>
-                        <a asp-action="TaskEdit" class="btn btn-success w-auto" asp-route-taskId="@item.Id">Edit</a>
-                        <a asp-action="TaskDelete" class="btn btn-danger w-auto" asp-route-taskId="@item.Id">Delete</a>
+                        @item.IsImplemented
+                    </td>
+                    <td>
+                        @item.ImplementedDate
+                    </td>
+                    <td>
+                        @item.ProjectId
+                    </td>
+                    <td>
+                        <a asp-action="TaskEdit" class="btn btn-success w-auto" asp-route-projectId="@item.ProjectId" asp-route-taskId="@item.Id">Edit</a>
+                        <a asp-action="TaskDelete" class="btn btn-danger w-auto" asp-route-projectId="@item.ProjectId" asp-route-taskId="@item.Id">Delete</a>
                     </td>
                 </tr>
             }

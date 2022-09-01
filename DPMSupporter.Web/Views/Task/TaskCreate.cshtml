@@ -1,8 +1,6 @@
 ﻿@model DPMSupporter.Web.Models.TaskDto
 
-
-
-<form asp-action="TaskCreate" asp-route-Id="ProjectId">
+<form asp-action="TaskCreate">
     <br />
     <div class="container border p-3">
         <h1 class="text-primary">Create Task</h1>
@@ -14,7 +12,7 @@
                 <label asp-for="ProjectId" class="control-label pt-2" style="font-size:20px;"></label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="ProjectId" class="form-control" />
+                <input asp-for="ProjectId" disabled class="form-control" />
                 <span asp-validation-for="ProjectId" class="text-danger"></span>
             </div>
             <div class="col-2">
@@ -36,6 +34,9 @@
             </div>
             <div class="col-5">
                 <input type="submit" value="Create" class="btn btn-success form-control" />
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="ProjectId" hidden class="form-control" />
             </div>
         </div>
         <div>
