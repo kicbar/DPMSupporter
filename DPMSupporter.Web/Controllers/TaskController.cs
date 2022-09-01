@@ -22,18 +22,18 @@ namespace DPMSupporter.Web.Controllers
             return View(await _projectService.SendGetAllRequest());
         }
 
-        public async Task<IActionResult> TaskList([FromRoute] Guid projectId)
+        public async Task<IActionResult> TaskList(Guid projectId)
         {
             return View(await _taskService.SendGetAllRequest(projectId));
         }
 
-        public async Task<IActionResult> TaskCreate()
+        public async Task<IActionResult> TaskCreate(Guid projectId)
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> TaskCreate([FromRoute] Guid projectId, [FromBody] TaskDto taskDto)
+        public async Task<IActionResult> TaskCreate(Guid projectId, TaskDto taskDto)
         {
             if (ModelState.IsValid)
             {
