@@ -19,9 +19,9 @@ namespace DPMSupporter.API.Controllers
         }
 
         [HttpPost]
-        public async Task<TaskDto> Post([FromRoute] Guid projectId, [FromBody] TaskDto taskDto)
+        public async Task<TaskDto> Post([FromRoute] Guid projectId, [FromBody] TaskWriteDto taskWriteDto)
         {
-            return await _taskService.CreateTask(projectId, taskDto);
+            return await _taskService.CreateTask(projectId, taskWriteDto);
         }
 
         [HttpGet]

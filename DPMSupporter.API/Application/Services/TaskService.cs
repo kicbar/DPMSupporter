@@ -16,9 +16,9 @@ namespace DPMSupporter.API.Application.Services
             _taskRepository = taskRepository;
         }
 
-        public async Task<TaskDto> CreateTask(Guid projectId, TaskDto taskDto)
+        public async Task<TaskDto> CreateTask(Guid projectId, TaskWriteDto taskWriteDto)
         {
-            return await ManualTaskMapper(await _taskRepository.AddTask(await ReverseManualTaskMapper(taskDto, projectId)));
+            return await ManualTaskMapper(await _taskRepository.AddTask(await ReverseManualTaskMapper(taskWriteDto, projectId)));
         }
 
         public async Task<TaskDto> GetTask(Guid projectId, Guid taskId)
@@ -57,6 +57,18 @@ namespace DPMSupporter.API.Application.Services
                 IsImplemented = (bool)task.IsImplemented,
                 ImplementedDate = task.ImplementedDate!=null ? task.ImplementedDate : null,
                 ProjectId = task.ProjectId
+            });
+        }
+
+        private static async Task<Domain.Entities.Task> ReverseManualTaskMapper(TaskWriteDto taskWriteDto, Guid projectId)
+        {
+            return await Task.Run(() =>
+            new Domain.Entities.Task
+            {
+                TaskName = taskWriteDto.TaskName,
+                Description = taskWriteDto.Description,
+                IsImplemented = taskWriteDto.IsImplemented,
+                ProjectId = projectId
             });
         }
 
