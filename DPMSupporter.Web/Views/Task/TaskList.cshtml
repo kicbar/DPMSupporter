@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<DPMSupporter.Web.Models.TaskDto>
 @{
-    ViewData["Title"] = "Task";
-    var projectId = Model.FirstOrDefault().ProjectId;
+    var projectId = ViewData["projectId"];
 }
 <br />
 <br />

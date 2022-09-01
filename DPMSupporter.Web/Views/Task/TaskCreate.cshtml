@@ -1,5 +1,7 @@
 ﻿@model DPMSupporter.Web.Models.TaskDto
-
+@{
+    var projectIdFromVD = ViewData["projectId"];
+}
 <form asp-action="TaskCreate">
     <br />
     <div class="container border p-3">

@@ -24,11 +24,13 @@ namespace DPMSupporter.Web.Controllers
 
         public async Task<IActionResult> TaskList(Guid projectId)
         {
+            ViewData["projectId"] = projectId;
             return View(await _taskService.SendGetAllRequest(projectId));
         }
 
         public async Task<IActionResult> TaskCreate(Guid projectId)
         {
+            ViewData["projectId"] = projectId;
             return View();
         }
 
@@ -36,7 +38,7 @@ namespace DPMSupporter.Web.Controllers
         public async Task<IActionResult> TaskCreate(Guid projectId, TaskDto taskDto)
         {
             var response = await _taskService.SendPostRequest(projectId, taskDto);
-            return RedirectToAction(nameof(TaskList), new { projectId = taskDto.ProjectId });
+            return RedirectToAction(nameof(TaskList), new { projectId });
         }
 
         public async Task<IActionResult> TaskEdit(Guid projectId, Guid taskId)
@@ -51,14 +53,22 @@ namespace DPMSupporter.Web.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _taskService.SendPutRequest(taskDto);
-                return RedirectToAction(nameof(TaskList), new { projectId = taskDto.ProjectId});
+                return RedirectToAction(nameof(TaskList), new { projectId });
             }
             return View(taskDto);
         }
 
-        public IActionResult TaskDelete()
+        public async Task<IActionResult> TaskDelete(Guid projectId, Guid taskId)
         {
-            return View();
+            var response = await _taskService.SendGetRequest(projectId, taskId);
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TaskDelete(TaskDto taskDto)
+        {
+            var response = await _taskService.SendDeleteRequest(taskDto.ProjectId, taskDto.Id);
+            return RedirectToAction(nameof(TaskList), new { taskDto.ProjectId });
         }
     }
 }
