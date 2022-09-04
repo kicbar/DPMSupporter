@@ -17,9 +17,6 @@
         <thead>
             <tr>
                 <th>
-                    Id
-                </th>
-                <th>
                     ProjectName
                 </th>
                 <th>
@@ -35,9 +32,6 @@
             {
                 <tr>
                     <td>
-                        @item.Id
-                    </td>
-                    <td>
                         @item.ProjectName
                     </td>
                     <td>
@@ -47,12 +41,8 @@
                         @item.CreatedDate
                     </td>
                     <td>
-                        <a asp-action="ProjectEdit" class="btn btn-success w-auto" asp-route-Id="@item.Id">
-                            Edit
-                        </a>
-                        <a asp-action="ProjectDelete" class="btn btn-danger w-auto" asp-route-Id="@item.Id">
-                            Delete
-                        </a>
+                        <a asp-action="ProjectEdit" class="btn btn-success w-auto" asp-route-Id="@item.Id">Edit</a>
+                        <a asp-action="ProjectDelete" class="btn btn-danger w-auto" asp-route-Id="@item.Id">Delete</a>
                     </td>
                 </tr>
             }
